@@ -104,6 +104,24 @@ a{color:inherit}
 .codebox code{flex:1;font-family:"Nunito",sans-serif;font-weight:900;font-size:24px;letter-spacing:2px;padding:8px 10px;color:#13261a;user-select:all}
 .copy{border:0;border-left:3px dashed #13261a;background:var(--yellow);font-weight:900;font-family:inherit;font-size:15px;padding:0 14px;cursor:pointer;color:#13261a}
 .fine{font-size:13px;color:#4b6352;margin-top:10px}
+.reg{background:#fffdf3;color:#13261a;border:3px solid #13261a;border-radius:20px;box-shadow:0 6px 0 #13261a;padding:18px 20px 20px;margin:0 auto 22px}
+.reg h3{font-family:"Bangers",sans-serif;font-weight:400;letter-spacing:1px;font-size:clamp(26px,4vw,34px);line-height:1;margin:0 0 4px;color:var(--green)}
+.reg>p{margin:0 0 12px;color:#4b6352;font-weight:600}
+.reg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.reg label.f{display:flex;flex-direction:column;gap:3px;font-size:13px;font-weight:900}
+.reg input[type=text],.reg input[type=email],.reg input[type=tel]{font:600 16px "Nunito",system-ui,sans-serif;padding:10px 12px;border:2px solid #13261a;border-radius:10px;background:#fff;color:#13261a;width:100%}
+.reg input:focus-visible{outline:3px solid var(--gold);outline-offset:1px}
+.reg .chk{display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:14px;font-weight:600;color:#13261a}
+.reg .chk input{width:20px;height:20px;margin:1px 0 0;flex:none;accent-color:var(--green)}
+.reg .chk a{color:var(--green);font-weight:900}
+.reg .btn{margin-top:14px}
+.reg-err{color:var(--red);font-weight:800;font-size:14px;margin:8px 0 0;min-height:1em}
+.reg-ok{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-weight:800}
+.reg-ok b{color:var(--green)}
+.reg-legal{font-size:12px;color:#5d7363;margin:16px 0 0;line-height:1.4}
+.reg.flash{animation:regflash .9s 2}
+@keyframes regflash{50%{box-shadow:0 6px 0 #13261a,0 0 0 6px var(--yellow)}}
+@media (max-width:700px){.reg-grid{grid-template-columns:1fr}}
 .gamebar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;color:var(--muted);font-size:14px;font-weight:600}
 .icon-btn{font-size:18px;width:40px;height:40px;border-radius:50%;border:2px solid var(--line);background:var(--soft);color:var(--ink);cursor:pointer;flex:none}
 
@@ -202,7 +220,7 @@ footer a{color:#fff}
     <div class="wrap">
       <h2 class="display">Cómo funciona</h2>
       <ol>
-        <li><b>Juega una partida</b><span>Tienes una sola vida y una sola partida. Que cuente.</span></li>
+        <li><b>Regístrate y juega</b><span>Déjanos tu nombre y tu email. Tienes una sola partida por persona y una sola vida. Que cuente.</span></li>
         <li><b>Recoge monedas</b><span>Cada moneda de oro suma un 1 % de descuento, hasta un máximo del 15 %.</span></li>
         <li><b>Usa tu código</b><span>Al terminar recibes un código. Pégalo en el carrito de la tienda antes de pagar.</span></li>
       </ol>
@@ -213,6 +231,21 @@ footer a{color:#fff}
     <div class="wrap">
       <h2 class="display">Escapa de Don Chistera</h2>
       <p class="lead">Salta con espacio o tocando la pantalla. Mantén pulsado en el aire para que Suertecillo planee con sus hojas.</p>
+      <form class="reg" id="regForm" novalidate>
+        <h3>Paso 1: regístrate para jugar</h3>
+        <p>Solo hay una partida por persona. Con tu email guardamos tu partida y te enviamos tu código de descuento.</p>
+        <div class="reg-grid">
+          <label class="f">Nombre *<input type="text" id="regNombre" name="nombre" autocomplete="given-name" required maxlength="60"></label>
+          <label class="f">Email *<input type="email" id="regEmail" name="email" autocomplete="email" required maxlength="120"></label>
+          <label class="f">Teléfono (opcional)<input type="tel" id="regTel" name="telefono" autocomplete="tel" maxlength="20"></label>
+        </div>
+        <label class="chk"><input type="checkbox" id="regPriv" required><span>He leído y acepto la <a href="privacidad.html" target="_blank" rel="noopener">política de privacidad</a> y las condiciones del juego. *</span></label>
+        <label class="chk"><input type="checkbox" id="regCom"><span>Quiero recibir ofertas y novedades de El Oro Verde por email (opcional).</span></label>
+        <p class="reg-err" id="regErr" role="alert"></p>
+        <button class="btn" type="submit">Registrarme y jugar</button>
+        <p class="reg-legal">Responsable: El Oro Verde. Finalidad: gestionar tu partida, enviarte tu código y, si lo marcas, enviarte ofertas. Puedes ejercer tus derechos en eloroverdeatencionalcliente@gmail.com.</p>
+      </form>
+      <div class="reg hidden" id="regDone"><div class="reg-ok">✅ <span>Registrado como <b id="regWho"></b>. Ya puedes jugar tu partida.</span></div></div>
       <div id="stage">
         <canvas id="game" aria-label="Juego: escapa del duende y recoge monedas de descuento"></canvas>
 
@@ -237,6 +270,7 @@ footer a{color:#fff}
               <p>Tu código de descuento:</p>
               <div class="codebox"><code id="resCode">—</code><button class="copy" id="copyBtn">Copiar</button></div>
               <a class="btn red" id="shopBtn" href="https://www.eloroverde.com/">Usar mi código en la tienda</a>
+              <p class="fine" id="resMail"></p>
               <p class="fine">Pega el código en el carrito antes de pagar. Válido para una compra.</p>
             </div>
             <div id="resNone" class="hidden">
@@ -294,6 +328,8 @@ footer a{color:#fff}
 const CONFIG={
   tiendaURL:'https://www.eloroverde.com/',
   maxDescuento:15,
+  // registro: los datos se guardan en MailerLite (grupos "Jugadores registrados" y "Partida terminada")
+  registro:{cuenta:'2695050',formRegistro:'202108721905533990',formFin:'202108722682529449'},
   permitirReinicio:true, // pon false al publicar: con true, añadir #reiniciar a la URL borra la partida (útil para pruebas)
   codigos:{1:'VERDE01-KQ',2:'VERDE02-ZT',3:'VERDE03-MX',4:'VERDE04-LB',5:'VERDE05-RW',6:'VERDE06-HN',7:'VERDE07-PD',8:'VERDE08-YF',
     9:'VERDE09-CJ',10:'VERDE10-SV',11:'VERDE11-GA',12:'VERDE12-UE',13:'VERDE13-TX',14:'VERDE14-OM',15:'VERDE15-BZ'},
@@ -375,10 +411,47 @@ window.addEventListener('resize',resize);resize();
 
 /* ---------- partida única ---------- */
 const PLAY_KEY='oroverde-partida';
-if(CONFIG.permitirReinicio&&(location.hash==='#reiniciar'||/[?&]reiniciar/.test(location.search)))LS.del(PLAY_KEY);
+const REG_KEY='oroverde-registro';
+if(CONFIG.permitirReinicio&&(location.hash==='#reiniciar'||/[?&]reiniciar/.test(location.search))){LS.del(PLAY_KEY);LS.del(REG_KEY);}
 function loadPlay(){try{return JSON.parse(LS.get(PLAY_KEY)||'null');}catch(e){return null;}}
 function savePlay(o){LS.set(PLAY_KEY,JSON.stringify(o));}
 const codeFor=p=>p>0?(CONFIG.codigos[Math.min(p,CONFIG.maxDescuento)]||null):null;
+
+/* ---------- registro (MailerLite) ---------- */
+function loadReg(){try{return JSON.parse(LS.get(REG_KEY)||'null');}catch(e){return null;}}
+const ORIGEN=(new URLSearchParams(location.search).get('utm_source')||'directo').slice(0,40);
+function mlSend(form,fields){
+  const fd=new FormData();
+  for(const k in fields)fd.append('fields['+k+']',fields[k]);
+  fd.append('ml-submit','1');fd.append('anticsrf','true');
+  return fetch('https://assets.mailerlite.com/jsonp/'+CONFIG.registro.cuenta+'/forms/'+form+'/subscribe',{method:'POST',body:fd,mode:'no-cors',keepalive:true}).catch(()=>{});
+}
+function reportFin(){
+  const reg=loadReg(),rec=loadPlay();
+  if(!reg||!rec||rec.enviado)return;
+  rec.enviado=true;rec.fin=true;savePlay(rec);
+  mlSend(CONFIG.registro.formFin,{email:reg.email,name:reg.nombre,descuento:rec.pct||0,codigo:codeFor(rec.pct)||'SIN DESCUENTO',partida:'terminada',origen:ORIGEN,acepta_comercial:reg.comercial?'si':'no'});
+}
+function showReg(){
+  const reg=loadReg();
+  $('regForm').classList.toggle('hidden',!!reg);$('regDone').classList.toggle('hidden',!reg);
+  if(reg)$('regWho').textContent=reg.nombre+' ('+reg.email+')';
+}
+$('regForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const nombre=$('regNombre').value.trim(),email=$('regEmail').value.trim().toLowerCase(),tel=$('regTel').value.trim();
+  const err=m=>{$('regErr').textContent=m;};
+  if(nombre.length<2)return err('Escribe tu nombre.');
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email))return err('Escribe un email válido.');
+  if(tel&&!/^[+\d][\d\s-]{6,}$/.test(tel))return err('Revisa el teléfono o déjalo vacío.');
+  if(!$('regPriv').checked)return err('Para jugar tienes que aceptar la política de privacidad.');
+  err('');
+  const reg={nombre,email,telefono:tel,comercial:$('regCom').checked,fecha:new Date().toISOString()};
+  LS.set(REG_KEY,JSON.stringify(reg));
+  mlSend(CONFIG.registro.formRegistro,{email,name:nombre,phone:tel,partida:'registrada',origen:ORIGEN,acepta_comercial:reg.comercial?'si':'no'});
+  showReg();
+  stage.scrollIntoView({behavior:'smooth',block:'center'});
+});
 
 /* ---------- sonido ---------- */
 let actx=null, muted=false;
@@ -476,6 +549,7 @@ function endGame(cause){
   else if(cause==='fall'){sfx.lose();say(S.duende,'¡Je, je! ¡Al hoyo!',2.2);}
   else{sfx.win();say(S.hero,'¡Adiós, Don Chistera!',2.2);say(S.duende,'¡Nooo, mi oro!',2.2);}
   savePlay({pct:S.pct,code:codeFor(S.pct),fin:true,causa:cause,fecha:new Date().toISOString()});
+  reportFin();
 }
 
 /* ---------- héroe ---------- */
@@ -934,9 +1008,16 @@ function showResult(already){
   else{t.textContent='¡Te pilló Don Chistera!';t.className='bad';$('resMsg').textContent=pct?'Aun así, te llevas lo que recogiste:':'Esta vez no soltó ni una moneda. Gracias por jugar.';}
   $('resWin').classList.toggle('hidden',!code);$('resNone').classList.toggle('hidden',!!code);
   if(code){$('resPct').textContent='−'+pct+' %';$('resCode').textContent=code;}
+  const reg=loadReg();$('resMail').textContent=reg?'También te lo enviamos a '+reg.email+'.':'';
 }
 function start(){
-  const prev=loadPlay();if(prev){showResult(true);return;}
+  const prev=loadPlay();if(prev){reportFin();showResult(true);return;}
+  if(!loadReg()){
+    const f=$('regForm');f.scrollIntoView({behavior:'smooth',block:'center'});
+    f.classList.remove('flash');void f.offsetWidth;f.classList.add('flash');
+    $('regErr').textContent='Primero regístrate para poder jugar.';setTimeout(()=>$('regNombre').focus({preventScroll:true}),500);
+    return;
+  }
   ensureAudio();newGame(false);paused=false;input.held=false;graceUntil=performance.now()+1500;
   savePlay({pct:0,code:null,fin:false});
   menu.classList.add('hidden');result.classList.add('hidden');pauseOv.classList.add('hidden');
@@ -971,7 +1052,8 @@ let lastRatio=1,graceUntil=0;
 if('IntersectionObserver' in window){new IntersectionObserver(es=>{for(const en of es){const r=en.intersectionRatio;if(r<0.4&&r<lastRatio&&performance.now()>graceUntil)setPause(true);lastRatio=r;}},{threshold:[0,0.2,0.4,0.7,1]}).observe(stage);}
 
 newGame(true);
-if(loadPlay())showResult(true);
+showReg();
+if(loadPlay()){reportFin();showResult(true);}
 let last=performance.now();
 function loop(now){
   const dt=Math.min(0.033,(now-last)/1000);last=now;

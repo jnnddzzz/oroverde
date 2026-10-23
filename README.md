@@ -11,7 +11,7 @@ La landing queda en `https://<usuario>.github.io/oroverde/`.
 
 ## Secciones
 
-Aviso +18, barra de envío gratis desde 45 €, cabecera con logo, menú, portada, cómo funciona (3 pasos), el videojuego, carrusel de 7 productos (se desliza en móvil, flechas en escritorio), ventajas de la tienda y pie con contacto.
+Aviso +18, barra de envío gratis desde 45 €, cabecera con logo, menú, portada, cómo funciona (3 pasos), el videojuego, registro obligatorio antes de jugar (conectado a MailerLite), carrusel de 7 productos, ventajas de la tienda y pie con contacto.
 
 ## El juego
 
