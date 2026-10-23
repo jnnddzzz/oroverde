@@ -9,6 +9,7 @@ Copia todo este texto y pégaselo a Claude. Pídele: **"Créame una publicación
 Una campaña de El Oro Verde (https://www.eloroverde.com/), una tienda online. La campaña es un **minijuego en una landing page** donde el cliente puede ganar **hasta un 15 % de descuento**.
 
 - **Landing con el juego:** https://jnnddzzz.github.io/oroverde/
+- **Enlace para poner en la bio de Instagram** (lleva la etiqueta para medir cuántos vienen de Instagram): https://jnnddzzz.github.io/oroverde/?utm_source=instagram
 - **Objetivo de la publicación:** que la gente entre en la landing, juegue y use su código en la tienda.
 - En Instagram los enlaces del texto no se pueden pulsar, así que la llamada a la acción tiene que ser **"Enlace en la bio"**, o un sticker de enlace si es una historia.
 
@@ -36,12 +37,12 @@ Una campaña de El Oro Verde (https://www.eloroverde.com/), una tienda online. L
 
 ## 4. Cómo funciona el juego (mensajes clave)
 
-1. **Salta y planea:** esquiva los ataques del duende (sombrero bumerán, brazo elástico, red) y también los cepos y los hoyos.
-2. **Coge monedas:** cada moneda de oro suma un 1 % de descuento, hasta el **15 %**.
-3. **Usa tu código:** al terminar sale un código de descuento para usar en la tienda.
+1. **Regístrate:** antes de jugar hay que dejar nombre y email (el teléfono es opcional) y aceptar la política de privacidad. Así se desbloquea la partida.
+2. **Escapa y coge monedas:** esquiva los ataques del duende (sombrero bumerán, brazo elástico, red), los cepos y los hoyos. Cada moneda de oro suma un 1 % de descuento, hasta el **15 %**.
+3. **Recibe tu código:** al terminar, el código sale en pantalla y además llega al email registrado.
 
 Reglas importantes:
-- **Solo una partida por persona y una sola vida.** Cualquier golpe termina la partida, pero el descuento que lleves ya es tuyo.
+- **Solo una partida por email y una sola vida.** Cualquier golpe termina la partida, pero el descuento que lleves ya es tuyo.
 - Si llegas al 15 %, ganas y la partida termina.
 - Cada código es de un solo uso por cliente.
 
@@ -86,8 +87,8 @@ Reglas importantes:
   - Opcional: una versión para historias de **1080×1920 px**.
 - **Texto de la publicación (caption):**
   - Un gancho en la primera línea.
-  - Los 3 pasos.
-  - El aviso de "solo una partida".
+  - Los 3 pasos (regístrate, juega, recibe tu código).
+  - El aviso de "solo una partida por email".
   - "Enlace en la bio".
   - El aviso de +18.
   - Entre 10 y 15 hashtags en español.
